@@ -11,4 +11,13 @@ export const useMenuStore = defineStore('menu', {
   getters: {
     collapse: (state) => state.isCollapse,
   },
+  persist: {
+    enabled: true,
+    strategies: [
+      {
+        key: 'menu',
+        storage: localStorage,
+      },
+    ],
+  },
 });
