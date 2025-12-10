@@ -2,7 +2,6 @@
 import 'virtual:uno.css'
 import { ref } from 'vue'
 import { RouterView } from 'vue-router'
-import { Icon } from "@iconify/vue";
 
 const dark = ref(false)
 

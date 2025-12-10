@@ -10,6 +10,8 @@
 </template>
 <script setup>
 import { ref, onMounted } from 'vue'
+import 'element-plus/dist/index.css' // 需要重新导入样式
+
 import { useStateReactive } from './hooks/index.js'
 import formItem from './components/formItem.vue'
 const formRef = ref(null)
