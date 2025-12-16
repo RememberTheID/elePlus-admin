@@ -10,28 +10,27 @@ export const base = [
     component: () => import('@/views/base/home/index.vue'),
   },
   {
-    path: '/about',
-    name: 'about',
+    path: '/component',
+    name: 'component',
     meta: {
-      title: '关于',
+      title: '组件',
       icon: 'material-symbols:travel-luggage-and-bags-outline'
     },
-    // component: () => import('@/views/base/about/index.vue'),
     children: [
       {
-        path: '/about/1',
-        name: 'about1',
+        path: '/component/baseForm',
+        name: 'baseForm',
         meta: {
-          title: '关于1',
+          title: 'Form表单',
           icon: 'material-symbols:travel-luggage-and-bags-outline'
         },
         component: () => import('@/views/base/about/1.vue'),
       },
       {
-        path: '/about/2',
-        name: 'about2',
+        path: '/component/baseTable',
+        name: 'baseTable',
         meta: {
-          title: '关于2',
+          title: 'Table表格',
           icon: 'material-symbols:travel-luggage-and-bags-outline'
         },
         component: () => import('@/views/base/about/2.vue'),

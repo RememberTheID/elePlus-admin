@@ -13,7 +13,8 @@ export const useForm = (props) => {
   const register = (e) => {
     return {
       schema: schemaProps,
-      el: e
+      el: e,
+      formConfig: props.formConfig
     }
   }
   return [register]

@@ -1,5 +1,5 @@
 import { isVNode, h } from 'vue';
-import { ElInput, ElInputNumber } from "element-plus";
+import { ElInput, ElInputNumber, ElSelect } from "element-plus";
 
 
 export const isVueComponentDefinition = (variable) => {
@@ -18,6 +18,7 @@ export const isVueComponentDefinition = (variable) => {
 export const componentMap = new Map()
 componentMap.set('Input', ElInput)
 componentMap.set('InputNumber', ElInputNumber)
+componentMap.set('Select', ElSelect)
 
 export const findComponent = (name) => {
   if (isVNode(name) || isVueComponentDefinition(name)) {

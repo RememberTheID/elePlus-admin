@@ -1,17 +1,16 @@
 <template>
-  <div class="p-4">
-    <baseForm :register="register"></baseForm>
+  <div>
+    <baseForm :register="register" />
   </div>
 </template>
 <script setup>
-import { ref } from 'vue'
-import { ElSelect } from 'element-plus'
+
 import { baseForm, useForm } from '@/components/form'
 const [register] = useForm({
   schema: [{
     label: '类型',
     field: 'type',
-    component: ElSelect,
+    component: 'Select',
     defaultValue: 1,
     componentProps: {
       placeholder: '请选择类型',
@@ -36,19 +35,9 @@ const [register] = useForm({
     componentProps: {
       placeholder: '请输入名称'
     }
-  }, {
-    label: '年龄',
-    field: 'age',
-    component: 'InputNumber',
-    defaultValue: 18,
-    show: (form) => form.type === 2,
-    componentProps: {
-      placeholder: '请输入年龄'
-    }
   }],
   formConfig: {
-    labelWidth: 100,
+
   }
 })
-
 </script>
