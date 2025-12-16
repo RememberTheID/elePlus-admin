@@ -34,7 +34,7 @@
       </div>
       <div class="content flex-1">
         <RouterView v-slot="{ Component }">
-          <Transition name="list" mode="out-in">
+          <Transition name="slide-left" mode="out-in">
             <component :is="Component" />
           </Transition>
         </RouterView>
@@ -67,26 +67,18 @@ const changeTheme = () => {
 }
 </script>
 <style scoped>
-.list-move,
-/* 对移动中的元素应用的过渡 */
-.list-enter-active,
-.list-leave-active {
-  transition: all 0.3s ease;
+.slide-left-enter-active,
+.slide-left-leave-active {
+  transition: 0.25s cubic-bezier(0.25, 0.8, 0.5, 1);
 }
 
-.list-enter-from {
+.slide-left-move {
+  transition: transform 0.3s;
+}
+
+.slide-left-enter-from,
+.slide-left-leave-to {
   opacity: 0;
-  transform: translateX(30px);
-}
-
-.list-leave-to {
-  opacity: 0;
-  transform: translateX(0px);
-}
-
-/* 确保将离开的元素从布局流中删除
-  以便能够正确地计算移动的动画。 */
-.list-leave-active {
-  position: absolute;
+  transform: translate(-15px);
 }
 </style>

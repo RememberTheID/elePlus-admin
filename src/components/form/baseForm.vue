@@ -9,6 +9,14 @@
           </el-form-item>
         </el-col>
       </template>
+      <el-col :span="4">
+        <slot name="buttons">
+          <div class="flex">
+            <el-button type="primary" :icon="Search">搜索</el-button>
+            <el-button>重置</el-button>
+          </div>
+        </slot>
+      </el-col>
     </el-row>
   </el-form>
 
@@ -16,6 +24,10 @@
 <script setup>
 import { omit, merge } from 'lodash-es'
 import { ref, onMounted } from 'vue'
+import {
+  Search,
+} from '@element-plus/icons-vue'
+
 import { formSetting } from '@/setting/baseComponents.js'
 import 'element-plus/dist/index.css' // 需要重新导入样式
 
