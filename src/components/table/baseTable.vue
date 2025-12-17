@@ -8,11 +8,11 @@
         <div>{{ tbConfig.title || '' }}</div>
       </slot>
       <div>
-        <columnSetting :columns="columns" />
+        <columnSetting ref="columnRef" @success="SetColumn" />
       </div>
     </div>
     <ElTable :data="tableData" table-layout="fixed" ref="tableRef">
-      <tableItem :columns="columns">
+      <tableItem :columns="TableColumn">
         <template v-for="slotName in Object.keys(slots)" :key="slotName" #[slotName]="scope">
           <slot :name="slotName" v-bind="scope"></slot>
         </template>
@@ -36,6 +36,7 @@ import { baseForm, useForm } from '@/components/form'
 import columnSetting from './components/columnSetting.vue'
 const formRef = ref(null)
 const tableRef = ref(null)
+const columnRef = ref(null)
 const [register, { validate, setProps }] = useForm({
   schema: []
 })
@@ -44,18 +45,23 @@ const customizer = (objValue, srcValue) => {
     return srcValue; // 如果是数组，直接使用新数组，不进行逐项合并
   }
 }
+
 const tableData = ref([{
   name: 'Tom',
   age: 18
 }])
 const slots = useSlots()
 const columns = ref([])
+const TableColumn = ref([])
 const tbConfig = ref({})
 const props = defineProps(['register'])
 const paramsPlus = ref({
   page: 1,
   pageSize: 10
 })
+const SetColumn = (arr) => {
+  TableColumn.value = arr
+}
 const getParams = async () => {
   const params = await validate()
   return {
@@ -94,8 +100,9 @@ onMounted(async () => {
   })
   setProps(config)
   columns.value = tableConfig.column
+  TableColumn.value = tableConfig.column
   tbConfig.value = omit(tableConfig, ['column'])
-  // console.log(merge(tabSetting.Pagination, tbConfig.value.Pagination))
+  columnRef.value.SetColumn(tableConfig.column)
   getData()
 })
 </script>

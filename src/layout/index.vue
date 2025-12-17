@@ -33,13 +33,13 @@
         </div>
       </div>
       <div class="content flex-1">
-        <RouterView v-slot="{ Component }">
-          <Transition name="slide-left" mode="out-in">
-            <ElConfigProvider :locale="zhCn">
+        <ElConfigProvider :locale="zhCn">
+          <RouterView v-slot="{ Component }">
+            <Transition name="slide-left" mode="out-in">
               <component :is="Component" />
-            </ElConfigProvider>
-          </Transition>
-        </RouterView>
+            </Transition>
+          </RouterView>
+        </ElConfigProvider>
       </div>
       <div class="bottom"></div>
     </div>
