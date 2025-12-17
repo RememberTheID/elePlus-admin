@@ -1,7 +1,7 @@
 <template>
   <div class="flex h-full">
     <Menu />
-    <div class="flex-1 flex flex-col box-border">
+    <div class="flex-1 flex flex-col box-border min-w-0">
       <div class="top_header border-b-solid border-b-1 border-gray-200 pb-4 px-2">
         <div class="flex flex-col">
           <div class="mr-2 flex items-center justify-between">
@@ -35,7 +35,9 @@
       <div class="content flex-1">
         <RouterView v-slot="{ Component }">
           <Transition name="slide-left" mode="out-in">
-            <component :is="Component" />
+            <ElConfigProvider :locale="zhCn">
+              <component :is="Component" />
+            </ElConfigProvider>
           </Transition>
         </RouterView>
       </div>
@@ -45,14 +47,18 @@
 </template>
 <script setup>
 import { ref, computed } from 'vue'
+import { ElConfigProvider } from 'element-plus'
 import { RouterView, useRoute } from 'vue-router'
 import { useMenuStore } from '@/stores/modules/menu.js'
+import zhCn from 'element-plus/es/locale/lang/zh-cn'
 const menuStore = useMenuStore()
 const route = useRoute()
 const routePages = computed(() => route.matched.slice(1))
 import { Icon } from "@iconify/vue";
 import Menu from './menu/index.vue'
 const sysTitle = import.meta.env.VITE_GLOB_APP_TITLE
+
+
 const switchCollapse = () => {
   menuStore.switchCollapse()
 }

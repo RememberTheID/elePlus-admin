@@ -9,11 +9,11 @@
           </el-form-item>
         </el-col>
       </template>
-      <el-col :span="4">
+      <el-col :span="4" v-if="merge(formSetting, formConfig).showBtns">
         <slot name="buttons">
           <div class="flex">
-            <el-button type="primary" :icon="Search">搜索</el-button>
-            <el-button>重置</el-button>
+            <el-button type="primary" :icon="Search" @click="searchData()">搜索</el-button>
+            <el-button @click="resetForm()" v-if="merge(formSetting, formConfig).showReset">重置</el-button>
           </div>
         </slot>
       </el-col>
@@ -35,6 +35,7 @@ import { useStateReactive } from './hooks/index.js'
 import formItem from './components/formItem.vue'
 const formRef = ref(null)
 const props = defineProps(['register'])
+const emit = defineEmits(['onSubmit', 'reset'])
 const [state, reset] = useStateReactive(() => {
   return {}
 })
@@ -45,13 +46,49 @@ const initDetail = () => {
     state[item.field] = item.defaultValue
   })
 }
+
+const resetForm = () => {
+  formRef.value.resetFields()
+  emit('reset')
+}
+const validForm = async () => {
+  try {
+    await formRef.value.validate()
+    return state
+  } catch (error) {
+    return Promise.reject(error)
+  }
+}
+const searchData = async () => {
+  try {
+    const value = await validForm()
+    emit('onSubmit', value)
+  } catch (error) {
+    // 校验失败会进入这里，从而避免 installHook.js 报错
+    console.warn('表单校验未通过，搜索中止', error)
+  }
+}
+
+const setSchemaConfig = async (obj) => {
+  schema.value = obj.schema || []
+  formConfig.value = omit(obj, ['schema'])
+  console.log(formConfig.value)
+  initDetail()
+}
 onMounted(() => {
   const schemaProps = props.register({
-    el: formRef
+    el: formRef,
+    events: {
+      validForm,
+      setSchemaConfig
+    }
   })
   schema.value = schemaProps.schema
   formConfig.value = schemaProps.formConfig
-  console.log(omit(formConfig.value), 'schemaProps')
   initDetail()
+})
+defineExpose({
+  validForm,
+  setSchemaConfig
 })
 </script>

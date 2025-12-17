@@ -1,43 +1,101 @@
 <template>
-  <div>
-    <baseForm :register="register" />
+  <div class="w-full">
+    <baseForm :register="register" ref="formRef" @onSubmit="getData()" />
+  </div>
+  <div class="flex flex-col gap-2 w-full min-w-0">
+    <div class="flex justify-between">
+      <slot name="table-title">
+        <div>{{ tbConfig.title || '' }}</div>
+      </slot>
+      <div>
+        <columnSetting :columns="columns" />
+      </div>
+    </div>
+    <ElTable :data="tableData" table-layout="fixed" ref="tableRef">
+      <tableItem :columns="columns">
+        <template v-for="slotName in Object.keys(slots)" :key="slotName" #[slotName]="scope">
+          <slot :name="slotName" v-bind="scope"></slot>
+        </template>
+      </tableItem>
+    </ElTable>
+    <div class="flex justify-end" v-if="tbConfig.Pagination !== false">
+      <ElPagination v-model:current-page="paramsPlus.page" v-model:page-size="paramsPlus.pageSize"
+        v-bind="mergeWith(tabSetting.Pagination, tbConfig.Pagination, customizer)" @size-change="handleSizeChange"
+        @current-change="handleCurrentChange" :total="tableData.length">
+      </ElPagination>
+    </div>
   </div>
 </template>
 <script setup>
-
+import { onMounted, onUnmounted, nextTick, ref, unref, useSlots } from 'vue'
+import { omit, mergeWith } from 'lodash-es'
+import { ElTable, ElPagination } from 'element-plus'
+import { tabSetting } from '@/setting/baseComponents.js'
+import tableItem from './components/tableItem.vue'
 import { baseForm, useForm } from '@/components/form'
-const [register] = useForm({
-  schema: [{
-    label: '类型',
-    field: 'type',
-    component: 'Select',
-    defaultValue: 1,
-    componentProps: {
-      placeholder: '请选择类型',
-      options: [
-        {
-          label: '姓名',
-          value: 1
-        },
-        {
-          label: '年龄',
-          value: 2
-        }
-      ]
-    }
-  },
-  {
-    label: '名称',
-    field: 'name',
-    component: 'Input',
-    defaultValue: '张三',
-    ifShow: (form) => form.type === 1,
-    componentProps: {
-      placeholder: '请输入名称'
-    }
-  }],
-  formConfig: {
-
+import columnSetting from './components/columnSetting.vue'
+const formRef = ref(null)
+const tableRef = ref(null)
+const [register, { validate, setProps }] = useForm({
+  schema: []
+})
+const customizer = (objValue, srcValue) => {
+  if (Array.isArray(objValue)) {
+    return srcValue; // 如果是数组，直接使用新数组，不进行逐项合并
   }
+}
+const tableData = ref([{
+  name: 'Tom',
+  age: 18
+}])
+const slots = useSlots()
+const columns = ref([])
+const tbConfig = ref({})
+const props = defineProps(['register'])
+const paramsPlus = ref({
+  page: 1,
+  pageSize: 10
+})
+const getParams = async () => {
+  const params = await validate()
+  return {
+    ...params,
+    ...paramsPlus.value
+  }
+}
+const getData = async () => {
+  try {
+    const params = await getParams()
+    const { api } = unref(tbConfig)
+    const { data } = await api(params)
+    tableData.value = data
+  } catch (error) {
+  }
+}
+
+const handleSizeChange = (val) => {
+  paramsPlus.value.pageSize = val
+  getData()
+}
+const handleCurrentChange = (val) => {
+  paramsPlus.value.page = val
+  getData()
+}
+
+onMounted(async () => {
+  const { config, tableConfig } = props.register({
+    el: {
+      formRef,
+      tableRef
+    },
+    events: {
+
+    }
+  })
+  setProps(config)
+  columns.value = tableConfig.column
+  tbConfig.value = omit(tableConfig, ['column'])
+  // console.log(merge(tabSetting.Pagination, tbConfig.value.Pagination))
+  getData()
 })
 </script>

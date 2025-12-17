@@ -3,7 +3,7 @@ import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-import vueDevTools from 'vite-plugin-vue-devtools'
+// import vueDevTools from 'vite-plugin-vue-devtools'
 
 // elementPlus 自动导入相关
 import AutoImport from 'unplugin-auto-import/vite'
@@ -18,7 +18,7 @@ export default defineConfig({
   plugins: [
     vue(),
     vueJsx(),
-    vueDevTools(),
+    // vueDevTools(),
     AutoImport({
       resolvers: [ElementPlusResolver()],
     }),
@@ -27,6 +27,12 @@ export default defineConfig({
     }),
     UnoCSS(),
   ],
+  css: {
+    devSourcemap: true,
+  },
+  build: {
+    sourcemap: true, // 如果需要在生产构建时也生成 sourcemap，设为 true
+  },
   base: './',
   resolve: {
     alias: {

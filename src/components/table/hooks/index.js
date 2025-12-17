@@ -1,8 +1,9 @@
 export const useTable = (props) => {
   const register = (e) => {
     return {
-      schema: props.schema,
-      el: e
+      config: props.formConfig,
+      el: e,
+      tableConfig: props.tableConfig
     }
   }
   return [register]
