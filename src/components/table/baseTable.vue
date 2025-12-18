@@ -100,7 +100,6 @@ onMounted(async () => {
   })
   setProps(config)
   columns.value = tableConfig.column
-  TableColumn.value = tableConfig.column
   tbConfig.value = omit(tableConfig, ['column'])
   columnRef.value.SetColumn(tableConfig.column)
   getData()
