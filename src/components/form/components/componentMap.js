@@ -1,8 +1,9 @@
-import { isVNode, h } from 'vue';
+import { isVNode, h, markRaw } from 'vue';
 import { ElInput, ElInputNumber, ElSelect } from "element-plus";
 
 
-export const isVueComponentDefinition = (variable) => {
+export const isVueComponentDefinition = (a) => {
+  const variable = markRaw(a)
   return (
     typeof variable === 'object' &&
     variable !== null &&

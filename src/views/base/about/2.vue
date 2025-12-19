@@ -1,8 +1,6 @@
 <template>
-  <div class="p-4">
-    <baseTable :register="register">
-    </baseTable>
-  </div>
+  <baseTable :register="register">
+  </baseTable>
 </template>
 
 <script setup lang="jsx">

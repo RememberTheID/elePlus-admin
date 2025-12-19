@@ -1,9 +1,9 @@
 <template>
-  <component :is="renderItem()" v-bind="{ ...attrs, ...item.componentProps }"></component>
+  <component :is="renderItem()" :teleported="false" v-bind="{ ...attrs, ...item.componentProps }"></component>
 </template>
 
 <script setup lang="jsx">
-import { useAttrs, onMounted } from 'vue'
+import { useAttrs } from 'vue'
 import { findComponent } from './componentMap'
 const props = defineProps(['item'])
 const renderItem = () => {

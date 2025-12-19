@@ -1,10 +1,17 @@
 <template>
   <div>
-    <ElPopover placement="bottom-end" v-model:visible="visible" :width="300" trigger="click">
+    <ElPopover :teleported="false" placement="bottom-end" v-model:visible="visible" :width="300" trigger="click">
       <template #reference>
-        <span>
-          <Icon icon="line-md:cog-loop" class="text-xl"></Icon>
-        </span>
+        <div>
+          <ElTooltip :teleported="false" placement="top" trigger="hover">
+            <span>
+              <Icon icon="line-md:cog-loop" class="text-xl cursor-pointer text-[#606266]"></Icon>
+            </span>
+            <template #content>
+              <span>列设置</span>
+            </template>
+          </ElTooltip>
+        </div>
       </template>
       <div>
         <ElTree :data="columns" default-expand-all :render-content="renderContent" draggable ref="elTreeRef"
@@ -22,7 +29,7 @@
 import { ref, onMounted } from 'vue'
 import { cloneDeep } from 'lodash-es';
 import { Icon } from '@iconify/vue';
-import { ElTree, ElPopover, ElButton, ElCheckbox } from 'element-plus';
+import { ElTree, ElPopover, ElButton, ElCheckbox, ElTooltip } from 'element-plus';
 import columnLR from './columnLR.vue'
 import { useStoragePublic } from '@/utils/storage.js'
 import { useRoute } from 'vue-router'

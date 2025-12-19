@@ -1,4 +1,4 @@
-import { reactive, markRaw, ref, unref } from 'vue'
+import { reactive, markRaw, shallowRef, ref, unref } from 'vue'
 import { omit } from 'lodash-es'
 import { isVueComponentDefinition } from '../components/componentMap.js'
 import { isFunction } from 'lodash-es'
