@@ -32,7 +32,7 @@
           </el-breadcrumb>
         </div>
       </div>
-      <div class="content flex-1">
+      <div class="content flex-1 relative">
         <ElConfigProvider :locale="zhCn">
           <RouterView v-slot="{ Component }">
             <Transition name="slide-left" mode="out-in">

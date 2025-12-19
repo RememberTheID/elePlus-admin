@@ -38,16 +38,15 @@
             </template>
           </ElDropdown>
           <columnSetting ref="columnRef" @success="SetColumn" />
-          <ElTooltip :show-after="300" placement="top" trigger="hover" :teleported="false">
+          <ElTooltip :show-after="300" ref="TooltipRef" placement="top" trigger="hover" :teleported="false">
             <span class="text-xl text-[#606266] cursor-pointer">
-              <Icon icon="ic:round-open-in-full" v-if="!isFullscreen" @click="enter" />
-              <Icon icon="ic:round-close-fullscreen" v-else @click="exit" />
+              <Icon icon="ic:round-open-in-full" v-if="!isFullscreen" @click="enterFullscreen" />
+              <Icon icon="ic:round-close-fullscreen" v-else @click="closeFullscreen" />
             </span>
             <template #content>
               <span>{{ isFullscreen ? '退出全屏' : '全屏' }}</span>
             </template>
           </ElTooltip>
-
         </div>
       </div>
       <ElTable :teleported="false" :data="tableData" table-layout="fixed" ref="tableRef" :size="tableSize">
@@ -81,6 +80,7 @@ const formRef = ref(null)
 const tableRef = ref(null)
 const columnRef = ref(null)
 const baseTableRef = ref(null)
+const TooltipRef = ref(null)
 const [register, { validate, setProps }] = useForm({
   schema: []
 })
@@ -104,7 +104,14 @@ const paramsPlus = ref({
 })
 
 const { isFullscreen, enter, exit, toggle } = useFullscreen(baseTableRef)
-
+const closeFullscreen = () => {
+  exit()
+  TooltipRef.value.hide()
+}
+const enterFullscreen = () => {
+  enter()
+  TooltipRef.value.hide()
+}
 const setRowHeight = (height) => {
   tableSize.value = height
 }

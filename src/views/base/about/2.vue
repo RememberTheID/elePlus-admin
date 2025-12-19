@@ -1,11 +1,14 @@
 <template>
-  <baseTable :register="register">
-  </baseTable>
+  <Watermark>
+    <baseTable :register="register">
+    </baseTable>
+  </Watermark>
 </template>
 
 <script setup lang="jsx">
 import { ElTag } from 'element-plus'
 import { baseTable, useTable } from '@/components/table'
+import Watermark from '@/components/watermark/index.vue'
 import { getList } from './api'
 const [register] = useTable({
   formConfig: {
