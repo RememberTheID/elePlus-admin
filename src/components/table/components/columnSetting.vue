@@ -3,7 +3,7 @@
     <ElPopover :teleported="false" placement="bottom-end" v-model:visible="visible" :width="300" trigger="click">
       <template #reference>
         <div>
-          <ElTooltip :teleported="false" placement="top" trigger="hover">
+          <ElTooltip :show-after="300" :teleported="false" placement="top" trigger="hover">
             <span>
               <Icon icon="line-md:cog-loop" class="text-xl cursor-pointer text-[#606266]"></Icon>
             </span>

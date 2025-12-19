@@ -9,7 +9,7 @@
           <div>{{ tbConfig.title || '' }}</div>
         </slot>
         <div class="flex gap-2">
-          <ElTooltip placement="top" trigger="hover" :teleported="false">
+          <ElTooltip :show-after="300" placement="top" trigger="hover" :teleported="false">
             <span class="text-xl cursor-pointer text-[#606266]" @click="getData()">
               <Icon icon="mdi:reload" />
             </span>
@@ -19,7 +19,7 @@
           </ElTooltip>
           <ElDropdown :teleported="false" :trigger="'click'">
             <div>
-              <ElTooltip placement="top" trigger="hover" :teleported="false">
+              <ElTooltip :show-after="300" placement="top" trigger="hover" :teleported="false">
                 <span class="text-xl cursor-pointer">
                   <Icon icon="fluent:auto-fit-height-28-filled" />
                 </span>
@@ -38,7 +38,7 @@
             </template>
           </ElDropdown>
           <columnSetting ref="columnRef" @success="SetColumn" />
-          <ElTooltip placement="top" trigger="hover" :teleported="false">
+          <ElTooltip :show-after="300" placement="top" trigger="hover" :teleported="false">
             <span class="text-xl text-[#606266] cursor-pointer">
               <Icon icon="ic:round-open-in-full" v-if="!isFullscreen" @click="enter" />
               <Icon icon="ic:round-close-fullscreen" v-else @click="exit" />
