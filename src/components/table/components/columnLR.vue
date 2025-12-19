@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center">
+  <div class="flex items-center" v-if="!disabled">
     <Icon icon="line-md:arrow-close-left" :class="modelValue === 'left' ? 'text-blue-500' : ''"
       @click="handlerCheck('left')"></Icon>
     <ElDivider direction="vertical"></ElDivider>

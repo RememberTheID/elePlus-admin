@@ -1,8 +1,8 @@
 <template>
-  <Watermark>
-    <baseTable :register="register">
-    </baseTable>
-  </Watermark>
+  <!-- <Watermark> -->
+  <baseTable :register="register">
+  </baseTable>
+  <!-- </Watermark> -->
 </template>
 
 <script setup lang="jsx">

@@ -23,7 +23,7 @@ const props = defineProps({
   },
   angle: {
     type: Number,
-    default: -40
+    default: -20
   },
   color: {
     type: String,
@@ -49,7 +49,7 @@ const renderWatermark = () => {
   const watermark = document.createElement('div');
   watermark.className = WATERMARK_CLASS;
   watermark.style.cssText = `
-    position:absolute;top:0;left:0;width:100%;height:100%;z-index:99999;
+    position:fixed;top:0;left:0;width:100%;height:100%;z-index:9999999;
     pointer-events:none;background-repeat:repeat;display:block!important;
     visibility:visible!important;opacity:1!important;
     background-image:url(${bgUrl.value});
@@ -68,11 +68,4 @@ watch(() => bgUrl.value, renderWatermark);
 onUnmounted(() => observer?.disconnect());
 </script>
 
-<style scoped>
-.water-container {
-  position: relative;
-  width: 100%;
-  height: 400px;
-  overflow: hidden;
-}
-</style>
+<style scoped></style>

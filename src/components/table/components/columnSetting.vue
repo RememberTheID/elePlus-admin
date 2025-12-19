@@ -80,7 +80,7 @@ const renderContent = (h, { node, data }) => {
         <ElCheckbox v-model={data.checked} onChange={emitSuccess}></ElCheckbox>
         <span>{data.label}</span>
       </div>
-      <columnLR v-model={data.fixed} onChange={emitSuccess}></columnLR>
+      <columnLR v-model={data.fixed} disabled={node.level !== 1} onChange={emitSuccess}></columnLR>
     </div>
   )
 }

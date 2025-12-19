@@ -102,7 +102,6 @@ const paramsPlus = ref({
   page: 1,
   pageSize: 10
 })
-
 const { isFullscreen, enter, exit, toggle } = useFullscreen(baseTableRef)
 const closeFullscreen = () => {
   exit()
