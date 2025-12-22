@@ -14,5 +14,8 @@ export const tabSetting = {
     layout: 'total, prev, pager, next,sizes',
     pageSizes: [10, 50, 100],
     pageSize: 10
+  },
+  columnSet: {
+    catchKey: 'defalut'
   }
 }

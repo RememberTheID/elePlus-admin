@@ -72,7 +72,6 @@ const searchData = async () => {
 const setSchemaConfig = async (obj) => {
   schema.value = obj.schema || []
   formConfig.value = omit(obj, ['schema'])
-  console.log(formConfig.value)
   initDetail()
 }
 onMounted(() => {

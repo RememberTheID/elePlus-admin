@@ -26,7 +26,7 @@
   </div>
 </template>
 <script setup lang="jsx">
-import { ref, onMounted } from 'vue'
+import { ref, watchEffect } from 'vue'
 import { cloneDeep } from 'lodash-es';
 import { Icon } from '@iconify/vue';
 import { ElTree, ElPopover, ElButton, ElCheckbox, ElTooltip } from 'element-plus';
@@ -41,7 +41,11 @@ const props = defineProps({
     default: ''
   }
 })
-const STORAGE_KEY = `column-${route.fullPath}-${props.catchKey || 'default'}`
+
+let STORAGE_KEY = `column-${route.fullPath}-${props.catchKey || 'default'}`
+watchEffect(() => {
+  STORAGE_KEY = `column-${route.fullPath}-${props.catchKey || 'default'}`
+})
 const elTreeRef = ref(null)
 const emit = defineEmits(['success'])
 let columnBak = []

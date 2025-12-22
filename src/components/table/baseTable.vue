@@ -37,7 +37,8 @@
               </ElDropdownMenu>
             </template>
           </ElDropdown>
-          <columnSetting ref="columnRef" @success="SetColumn" :catchKey="tbConfig?.columnSet?.catchKey" />
+          <columnSetting ref="columnRef" @success="SetColumn"
+            :catchKey="tbConfig?.columnSet?.catchKey || tabSetting?.columnSet?.catchKey" />
           <ElTooltip :show-after="300" ref="TooltipRef" placement="top" trigger="hover" :teleported="false">
             <span class="text-xl text-[#606266] cursor-pointer">
               <Icon icon="ic:round-open-in-full" v-if="!isFullscreen" @click="enterFullscreen" />
@@ -67,7 +68,7 @@
 </template>
 <script setup>
 import { onMounted, ref, unref, useSlots } from 'vue'
-import { omit, mergeWith } from 'lodash-es'
+import { omit, mergeWith, merge } from 'lodash-es'
 import { ElTable, ElPagination, ElTooltip, ElDropdown, ElDropdownMenu, ElDropdownItem } from 'element-plus'
 import { tabSetting } from '@/setting/baseComponents.js'
 import tableItem from './components/tableItem.vue'
