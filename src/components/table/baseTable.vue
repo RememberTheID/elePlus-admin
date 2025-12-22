@@ -37,7 +37,7 @@
               </ElDropdownMenu>
             </template>
           </ElDropdown>
-          <columnSetting ref="columnRef" @success="SetColumn" />
+          <columnSetting ref="columnRef" @success="SetColumn" :catchKey="tbConfig?.columnSet?.catchKey" />
           <ElTooltip :show-after="300" ref="TooltipRef" placement="top" trigger="hover" :teleported="false">
             <span class="text-xl text-[#606266] cursor-pointer">
               <Icon icon="ic:round-open-in-full" v-if="!isFullscreen" @click="enterFullscreen" />
@@ -73,7 +73,6 @@ import { tabSetting } from '@/setting/baseComponents.js'
 import tableItem from './components/tableItem.vue'
 import { baseForm, useForm } from '@/components/form'
 import columnSetting from './components/columnSetting.vue'
-
 import { Icon } from '@iconify/vue';
 import { useFullscreen } from '@vueuse/core'
 const formRef = ref(null)

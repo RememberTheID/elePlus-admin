@@ -5,7 +5,7 @@
   <!-- </Watermark> -->
 </template>
 
-<script setup lang="jsx">
+<script setup lang="jsx" name="demo-table">
 import { ElTag } from 'element-plus'
 import { baseTable, useTable } from '@/components/table'
 import Watermark from '@/components/watermark/index.vue'

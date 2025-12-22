@@ -35,8 +35,13 @@ import { useStoragePublic } from '@/utils/storage.js'
 import { useRoute } from 'vue-router'
 const route = useRoute()
 const { setItem, getItem } = useStoragePublic()
-const STORAGE_KEY = `column-${route.fullPath}`
-
+const props = defineProps({
+  catchKey: {
+    type: String,
+    default: ''
+  }
+})
+const STORAGE_KEY = `column-${route.fullPath}-${props.catchKey || 'default'}`
 const elTreeRef = ref(null)
 const emit = defineEmits(['success'])
 let columnBak = []
