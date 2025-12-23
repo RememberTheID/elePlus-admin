@@ -35,7 +35,7 @@
       <div class="content flex-1 relative">
         <ElConfigProvider :locale="zhCn">
           <RouterView v-slot="{ Component, route }">
-            <Transition name="slide-left" mode="out-in" target="div">
+            <Transition name="slide-left" mode="out-in">
               <div :key="route.path">
                 <component :is="Component" />
               </div>
