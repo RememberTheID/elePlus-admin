@@ -2,7 +2,7 @@
   <div class="flex h-full">
     <Menu />
     <div class="flex-1 flex flex-col box-border min-w-0">
-      <div class="top_header border-b-solid border-b-1 border-gray-200 pb-4 px-2">
+      <div class="top_header border-b-solid border-b-1 border-gray-200  px-2">
         <div class="flex flex-col">
           <div class="mr-2 flex items-center justify-between">
             <div class="flex">
@@ -31,6 +31,9 @@
             </template>
           </el-breadcrumb>
         </div>
+        <div class="target mt-4">
+          <Tabs />
+        </div>
       </div>
       <div class="content flex-1 relative">
         <ElConfigProvider :locale="zhCn">
@@ -53,6 +56,8 @@ import { ElConfigProvider } from 'element-plus'
 import { RouterView, useRoute } from 'vue-router'
 import { useMenuStore } from '@/stores/modules/menu.js'
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
+import Tabs from './tabs/index.vue'
+
 const menuStore = useMenuStore()
 const route = useRoute()
 const routePages = computed(() => route.matched.slice(1))
