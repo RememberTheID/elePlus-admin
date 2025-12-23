@@ -9,7 +9,16 @@
 import { ElTag } from 'element-plus'
 import { baseTable, useTable } from '@/components/table'
 import Watermark from '@/components/watermark/index.vue'
-import { getList } from './api'
+// import { getList } from './api'
+const getList = async (params) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve({
+        data: [{ name: '张三', age: 18, chinese: 100 }]
+      })
+    }, 1000);
+  })
+}
 const [register] = useTable({
   formConfig: {
     schema: [{

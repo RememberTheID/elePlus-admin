@@ -12,7 +12,7 @@
       <el-col :span="4" v-if="merge(formSetting, formConfig).showBtns">
         <slot name="buttons">
           <div class="flex">
-            <el-button type="primary" :icon="Search" @click="searchData()">搜索</el-button>
+            <el-button type="primary" :icon="Search" @click="searchData()" :loading="formConfig.loading">搜索</el-button>
             <el-button @click="resetForm()" v-if="merge(formSetting, formConfig).showReset">重置</el-button>
           </div>
         </slot>
@@ -64,8 +64,6 @@ const searchData = async () => {
     const value = await validForm()
     emit('onSubmit', value)
   } catch (error) {
-    // 校验失败会进入这里，从而避免 installHook.js 报错
-    console.warn('表单校验未通过，搜索中止', error)
   }
 }
 

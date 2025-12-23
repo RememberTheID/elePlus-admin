@@ -50,7 +50,9 @@
           </ElTooltip>
         </div>
       </div>
-      <ElTable :teleported="false" :data="tableData" table-layout="fixed" ref="tableRef" :size="tableSize">
+      <ElTable :teleported="false" :data="tableData" v-loading="loading"
+        v-bind="mergeWith(tabSetting.tableProps, tbConfig.tableProps, customizer)" table-layout="fixed" ref="tableRef"
+        :size="tableSize">
         <tableItem :columns="TableColumn">
           <template v-for="slotName in Object.keys(slots)" :key="slotName" #[slotName]="scope">
             <slot :name="slotName" v-bind="scope"></slot>
@@ -81,6 +83,8 @@ const tableRef = ref(null)
 const columnRef = ref(null)
 const baseTableRef = ref(null)
 const TooltipRef = ref(null)
+
+const loading = ref(false)
 const [register, { validate, setProps }] = useForm({
   schema: []
 })
@@ -126,11 +130,16 @@ const getParams = async () => {
 }
 const getData = async () => {
   try {
+    loading.value = true
+    setProps({ loading: true })
     const params = await getParams()
     const { api } = unref(tbConfig)
     const { data } = await api(params)
     tableData.value = data
   } catch (error) {
+  } finally {
+    loading.value = false
+    setProps({ loading: false })
   }
 }
 
