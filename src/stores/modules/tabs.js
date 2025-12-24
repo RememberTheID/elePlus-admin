@@ -5,7 +5,10 @@ export const useTabsStore = defineStore('tabs', {
   }),
   actions: {
     addTabs (item) {
-      this.Tabs.add(item)
+      const { meta = { hideTarget: false } } = item || {}
+      if (!meta.hideTarget) {
+        this.Tabs.add(item)
+      }
     },
     removeTab (item) {
       this.Tabs.delete(item)

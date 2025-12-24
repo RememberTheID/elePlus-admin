@@ -30,6 +30,7 @@ export default defineConfig({
   css: {
     devSourcemap: true,
   },
+  assetsInclude: ['**/*.lottie'],
   build: {
     sourcemap: true, // 如果需要在生产构建时也生成 sourcemap，设为 true
   },

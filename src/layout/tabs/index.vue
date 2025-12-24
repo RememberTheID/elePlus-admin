@@ -2,8 +2,10 @@
   <div>
     <ElTabs :closable="tabsStore.tabTarget.length > 1" :model-value="route.path" type="card" @tab-click="handleClick"
       @tab-remove="removeTab">
-      <ElTabPane class="mx-2" :label="item.title" :name="item.path" v-for="item in tabsStore.tabTarget"
-        :key="item.path"></ElTabPane>
+      <template v-for="item in tabsStore.tabTarget" :key="item.path">
+        <ElTabPane :label="item.title" v-if="item" :name="item.path">
+        </ElTabPane>
+      </template>
     </ElTabs>
   </div>
 </template>

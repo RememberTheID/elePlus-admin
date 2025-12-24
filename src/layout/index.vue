@@ -39,7 +39,7 @@
         <ElConfigProvider :locale="zhCn">
           <RouterView v-slot="{ Component, route }">
             <Transition name="slide-left" mode="out-in">
-              <div :key="route.path">
+              <div :key="route.path" class="h-full w-full">
                 <component :is="Component" />
               </div>
             </Transition>

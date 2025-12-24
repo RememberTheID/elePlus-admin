@@ -39,7 +39,7 @@
           </ElDropdown>
           <columnSetting ref="columnRef" @success="SetColumn"
             :catchKey="tbConfig?.columnSet?.catchKey || tabSetting?.columnSet?.catchKey" />
-          <ElTooltip :show-after="300" ref="TooltipRef" placement="top" trigger="hover" :teleported="false">
+          <!-- <ElTooltip :show-after="300" ref="TooltipRef" placement="top" trigger="hover" :teleported="false">
             <span class="text-xl text-[#606266] cursor-pointer">
               <Icon icon="ic:round-open-in-full" v-if="!isFullscreen" @click="enterFullscreen" />
               <Icon icon="ic:round-close-fullscreen" v-else @click="closeFullscreen" />
@@ -47,7 +47,7 @@
             <template #content>
               <span>{{ isFullscreen ? '退出全屏' : '全屏' }}</span>
             </template>
-          </ElTooltip>
+          </ElTooltip> -->
         </div>
       </div>
       <ElTable :teleported="false" :data="tableData" v-loading="loading"

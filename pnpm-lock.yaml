@@ -11,6 +11,9 @@ importers:
       '@element-plus/icons-vue':
         specifier: ^2.3.2
         version: 2.3.2(vue@3.5.25)
+      '@lottiefiles/dotlottie-vue':
+        specifier: ^0.10.10
+        version: 0.10.10(vue@3.5.25)
       '@vueuse/core':
         specifier: ^14.1.0
         version: 14.1.0(vue@3.5.25)
@@ -502,6 +505,14 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
+
+  '@lottiefiles/dotlottie-vue@0.10.10':
+    resolution: {integrity: sha512-zj0VTJigCcr9CdeUr2fCSz+1h5GEKHGiLZlpBISerTUUvn7qBFC27NeomiXw9ExNcUnTNgiyLbJbl8vbrLaxEA==}
+    peerDependencies:
+      vue: ^3.3.4
+
+  '@lottiefiles/dotlottie-web@0.58.1':
+    resolution: {integrity: sha512-YC4pmScrV0R3rd11gU5xHrjeNczlCic69zlnMH/buDIzYxIbpR88oPUhGtKgu5ln7EJchoLpeRJbA3uLCzSeTA==}
 
   '@pkgr/core@0.2.9':
     resolution: {integrity: sha512-QNqXyfVS2wm9hweSYD2O7F0G06uurj9kZ96TRQE5Y9hU7+tgdZwIkbAKc5Ocy1HxEY2kuDQa6cQ1WRs/O5LFKA==}
@@ -2333,6 +2344,13 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
+
+  '@lottiefiles/dotlottie-vue@0.10.10(vue@3.5.25)':
+    dependencies:
+      '@lottiefiles/dotlottie-web': 0.58.1
+      vue: 3.5.25
+
+  '@lottiefiles/dotlottie-web@0.58.1': {}
 
   '@pkgr/core@0.2.9': {}
 
