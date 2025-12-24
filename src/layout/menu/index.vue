@@ -1,12 +1,11 @@
 <template>
-  <el-menu :default-active="route.name" class="w-full h-full" @select="onSelect" :collapse="menuStore.isCollapse">
+  <el-menu :default-active="route.name" class="w-40" @select="onSelect" :collapse="menuStore.isCollapse">
     <menuItem :menu="base">
     </menuItem>
   </el-menu>
 </template>
 
 <script setup>
-import { watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import menuItem from './menuItem.vue'
 import { ElMessage } from 'element-plus'
@@ -23,7 +22,6 @@ const routers = router.getRoutes().map(item => ({
   meta: item?.meta,
   name: item?.name
 }))
-const emit = defineEmits(['collapse'])
 const FindTabs = (name) => {
   return routers.find(item => item.name === name) || {}
 }
@@ -39,10 +37,6 @@ const onSelect = (index) => {
   }
 }
 onSelect(route.name)
-const onChange = () => {
-  emit('collapse', menuStore.isCollapse)
-}
-
 </script>
 
 <style>
