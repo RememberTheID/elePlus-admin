@@ -17,5 +17,12 @@ export const tabSetting = {
   },
   columnSet: {
     catchKey: 'defalut'
+  },
+  actionSet: {
+    label: '操作',
+    fixed: 'right',
+    show: true,
+    align: 'center',
+    width: 180
   }
 }

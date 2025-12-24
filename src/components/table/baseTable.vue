@@ -58,6 +58,11 @@
             <slot :name="slotName" v-bind="scope"></slot>
           </template>
         </tableItem>
+        <ElTableColumn label="操作" fixed="right" v-if="mgConfig.actionSet.show" v-bind="mgConfig.actionSet">
+          <template #default="scope">
+            <slot name="action" v-bind="scope"></slot>
+          </template>
+        </ElTableColumn>>
       </ElTable>
       <div class="flex justify-end" v-if="tbConfig.Pagination !== false">
         <ElPagination :teleported="false" v-model:current-page="paramsPlus.page" v-model:page-size="paramsPlus.pageSize"
@@ -69,9 +74,9 @@
   </div>
 </template>
 <script setup>
-import { onMounted, ref, unref, useSlots } from 'vue'
+import { onMounted, ref, unref, useSlots, computed } from 'vue'
 import { omit, mergeWith, merge } from 'lodash-es'
-import { ElTable, ElPagination, ElTooltip, ElDropdown, ElDropdownMenu, ElDropdownItem } from 'element-plus'
+import { ElTable, ElPagination, ElTooltip, ElDropdown, ElDropdownMenu, ElDropdownItem, ElTableColumn } from 'element-plus'
 import { tabSetting } from '@/setting/baseComponents.js'
 import tableItem from './components/tableItem.vue'
 import { baseForm, useForm } from '@/components/form'
@@ -107,6 +112,9 @@ const paramsPlus = ref({
   pageSize: 10
 })
 const { isFullscreen, enter, exit, toggle } = useFullscreen(baseTableRef)
+const mgConfig = computed(() => {
+  return mergeWith(tabSetting, tbConfig.value, customizer)
+})
 const closeFullscreen = () => {
   exit()
   TooltipRef.value.hide()

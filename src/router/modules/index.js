@@ -11,7 +11,7 @@ const baseNotPage = {
       hideBreadcrumb: true,
       hideTarget: true,
     },
-    path: '/404',
+    path: '404',
     name: 'notPage',
     component: () => import('@/views/sys/errorPage/notPage.vue'),
   }]

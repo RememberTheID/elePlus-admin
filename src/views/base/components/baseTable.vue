@@ -1,20 +1,23 @@
 <template>
-  <!-- <Watermark> -->
-  <baseTable :register="register">
-  </baseTable>
-  <!-- </Watermark> -->
+  <Watermark>
+    <baseTable :register="register">
+      <template #action="{ row }">
+        <baseAction :actions="getActions(row)" />
+      </template>
+    </baseTable>
+  </Watermark>
 </template>
 
 <script setup lang="jsx" name="demo-table">
 import { ElTag } from 'element-plus'
-import { baseTable, useTable } from '@/components/table'
+import { baseTable, useTable, baseAction } from '@/components/table'
 import Watermark from '@/components/watermark/index.vue'
 // import { getList } from './api'
 const getList = async (params) => {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve({
-        data: [{ name: '张三', age: 18, chinese: 100 }]
+        data: [{ name: '张三', id: 123123, age: 18, chinese: 100 }]
       })
     }, 1000);
   })
@@ -89,4 +92,26 @@ const [register] = useTable({
     }],
   }
 })
+const getActions = (row) => {
+  return [
+    {
+      label: '编辑',
+      type: 'primary',
+      onClick: () => {
+        console.log(row)
+      }
+    },
+    {
+      label: '删除',
+      type: 'danger',
+      popConfirm: {
+        title: '确定删除?',
+        placement: 'top',
+        onConfirm: () => {
+          console.log(row)
+        }
+      }
+    }
+  ]
+}
 </script>
