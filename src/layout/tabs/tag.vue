@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full flex gap-2 mb-1">
+  <div class="w-full flex gap-2 mb-3">
     <div class="left select-none" v-show="showMove">
       <Icon icon="line-md:chevron-small-left" class="text-2xl cursor-pointer" @click="leftMove" />
     </div>
@@ -45,7 +45,6 @@ const clickItem = (item, e, index) => {
   }, index)
 };
 const close = (item) => {
-  console.log(item)
   emit('tab-remove', item.path)
 }
 let moveRange = scrollRef?.value?.offsetWidth || 200
