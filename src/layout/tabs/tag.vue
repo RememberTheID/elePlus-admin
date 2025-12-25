@@ -23,7 +23,7 @@ import { ref, watchEffect } from 'vue'
 import { useScroll, useElementSize } from '@vueuse/core';
 import { ElTag } from "element-plus";
 import { Icon } from "@iconify/vue";
-import { floor } from 'lodash-es';
+import { floor, debounce } from 'lodash-es';
 const scrollRef = ref(null)
 const showMove = ref(false)
 const { x } = useScroll(scrollRef, { behavior: 'smooth' })
@@ -55,10 +55,10 @@ const close = (item) => {
   emit('tab-remove', item.path)
 }
 let moveRange = scrollRef?.value?.offsetWidth || 200
-const resetMove = (currentWidth) => {
+const resetMove = debounce((currentWidth) => {
   moveRange = floor(scrollRef?.value?.offsetWidth, -2)
   showMove.value = scrollRef?.value?.scrollWidth > currentWidth
-}
+}, 100)
 
 // 监听scrollRef宽度变化
 watchEffect(() => {
