@@ -46,9 +46,6 @@ const [register] = useForm({
       placeholder: '请输入年龄'
     }
   }],
-  config: {
-    labelWidth: 100,
-  }
 })
 
 </script>

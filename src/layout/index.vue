@@ -60,11 +60,16 @@ import Tabs from './tabs/index.vue'
 
 const menuStore = useMenuStore()
 const route = useRoute()
-const routePages = computed(() => route.matched.slice(1))
+const routePages = computed(() => route.matched.reduce((acc, item) => {
+  // 根据meta.title去重
+  if (!acc.find(i => i.meta.title === item.meta.title)) {
+    acc.push(item)
+  }
+  return acc
+}, []))
 import { Icon } from "@iconify/vue";
 import Menu from './menu/index.vue'
 const sysTitle = import.meta.env.VITE_GLOB_APP_TITLE
-
 
 const switchCollapse = () => {
   menuStore.switchCollapse()
