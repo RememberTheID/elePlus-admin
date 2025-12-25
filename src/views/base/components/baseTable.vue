@@ -9,6 +9,7 @@
 </template>
 
 <script setup lang="jsx" name="demo-table">
+import { onMounted, ref } from 'vue'
 import { ElTag } from 'element-plus'
 import { baseTable, useTable, baseAction } from '@/components/table'
 import Watermark from '@/components/watermark/index.vue'
@@ -22,7 +23,7 @@ const getList = async (params) => {
     }, 1000);
   })
 }
-const [register] = useTable({
+const [register, { reload }] = useTable({
   formConfig: {
     schema: [{
       label: '类型',
@@ -98,7 +99,7 @@ const getActions = (row) => {
       label: '编辑',
       type: 'primary',
       onClick: () => {
-        console.log(row)
+        reload(true)
       }
     },
     {

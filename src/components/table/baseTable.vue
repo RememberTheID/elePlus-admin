@@ -150,7 +150,15 @@ const getData = async () => {
     setProps({ loading: false })
   }
 }
+const reload = (reset = false) => {
+  if (reset) {
+    paramsPlus.value.page = 1
+  }
+  if (tbConfig.value.api) {
+    getData()
+  }
 
+}
 const handleSizeChange = (val) => {
   paramsPlus.value.pageSize = val
   getData()
@@ -159,16 +167,16 @@ const handleCurrentChange = (val) => {
   paramsPlus.value.page = val
   getData()
 }
-
+const events = {
+  reload
+}
 onMounted(async () => {
   const { config, tableConfig } = props.register({
     el: {
       formRef,
       tableRef
     },
-    events: {
-
-    }
+    events: events
   })
   setProps(config)
   columns.value = tableConfig.column
@@ -176,6 +184,7 @@ onMounted(async () => {
   columnRef.value.SetColumn(tableConfig.column)
   getData()
 })
+defineExpose(events)
 </script>
 <style scoped>
 :deep(.el-tooltip__trigger:focus-visible) {

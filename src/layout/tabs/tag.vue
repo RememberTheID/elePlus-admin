@@ -19,15 +19,22 @@
   </div>
 </template>
 <script setup>
-import { ref, onMounted } from 'vue'
-import { useScroll } from '@vueuse/core';
+import { ref, watchEffect } from 'vue'
+import { useScroll, useElementSize } from '@vueuse/core';
 import { ElTag } from "element-plus";
 import { Icon } from "@iconify/vue";
 import { floor } from 'lodash-es';
 const scrollRef = ref(null)
 const showMove = ref(false)
 const { x } = useScroll(scrollRef, { behavior: 'smooth' })
+const { width } = useElementSize(scrollRef)
 const emit = defineEmits(['tab-click', 'tab-remove'])
+const props = defineProps({
+  options: {
+    type: Array,
+    default: () => []
+  }
+})
 const clickItem = (item, e, index) => {
   value.value = item;
   const target = e.currentTarget;
@@ -48,10 +55,19 @@ const close = (item) => {
   emit('tab-remove', item.path)
 }
 let moveRange = scrollRef?.value?.offsetWidth || 200
-onMounted(() => {
+const resetMove = (currentWidth) => {
   moveRange = floor(scrollRef?.value?.offsetWidth, -2)
-  showMove.value = scrollRef?.value?.scrollWidth > scrollRef?.value?.offsetWidth
+  showMove.value = scrollRef?.value?.scrollWidth > currentWidth
+}
+
+// 监听scrollRef宽度变化
+watchEffect(() => {
+  const currentWidth = width.value
+  const length = props.options.length
+  resetMove(currentWidth)
 })
+
+
 const leftMove = () => {
   const left = x.value - moveRange
   x.value = left
@@ -61,12 +77,7 @@ const rightMove = () => {
   x.value = left
 }
 const value = ref(1)
-const props = defineProps({
-  options: {
-    type: Array,
-    default: () => []
-  }
-})
+
 const modelValue = defineModel()
 </script>
 <style scoped>
