@@ -1,6 +1,7 @@
 <template>
   <div ref="waterContainerRef" class="water-container">
-    <slot></slot>
+    <slot>
+    </slot>
   </div>
 </template>
 

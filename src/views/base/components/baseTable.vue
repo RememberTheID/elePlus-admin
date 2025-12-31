@@ -5,6 +5,8 @@
         <baseAction :actions="getActions(row)" />
       </template>
     </baseTable>
+    <listModel :register="registerModel"></listModel>
+    <listModel2 :register="registerModel2"></listModel2>
   </Watermark>
 </template>
 
@@ -13,7 +15,9 @@ import { onMounted, ref } from 'vue'
 import { ElTag } from 'element-plus'
 import { baseTable, useTable, baseAction } from '@/components/table'
 import Watermark from '@/components/watermark/index.vue'
-// import { getList } from './api'
+import listModel from '@/views/base/components/lib/listModel.vue'
+import listModel2 from './lib/listModel2.vue'
+import { useModel } from '@/components/baseModel/index.js'
 const getList = async (params) => {
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -93,13 +97,28 @@ const [register, { reload }] = useTable({
     }],
   }
 })
+const [registerModel, { openModel }] = useModel()
+const [registerModel2, { openModel: openModel2 }] = useModel()
 const getActions = (row) => {
   return [
     {
       label: '编辑',
       type: 'primary',
       onClick: () => {
-        reload(true)
+        openModel({
+          data: row,
+          title: '编辑'
+        })
+      }
+    },
+    {
+      label: '编辑2',
+      type: 'primary',
+      onClick: () => {
+        openModel2({
+          data: row,
+          title: '编辑2'
+        })
       }
     },
     {

@@ -2,7 +2,7 @@
   <el-form :model="state" ref="formRef" v-bind="omit(formConfig, ['colLayout'])">
     <el-row :gutter="10">
       <template v-for="item in schema" :key="item.field">
-        <el-col v-bind="merge(formSetting.colLayout, formConfig.colLayout, item.colLayout)" :span="formConfig.colLayout"
+        <el-col :span="formConfig.colLayout" v-bind="item.colLayout || formConfig.colLayout || formSetting.colLayout"
           v-if="item.ifShow ? item.ifShow(state) : true" v-show="item.show ? item.show(state) : true">
           <el-form-item :label="item.label" :prop="item.field">
             <formItem :item="item" v-model="state[item.field]"></formItem>
