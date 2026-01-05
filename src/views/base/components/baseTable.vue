@@ -4,25 +4,30 @@
       <template #action="{ row }">
         <baseAction :actions="getActions(row)" />
       </template>
+      <template #table-title>
+        <div>
+          <ElButton type="primary" @click="openModel({ title: '新增' })">新增</ElButton>
+        </div>
+      </template>
     </baseTable>
-    <listModel :register="registerModel"></listModel>
-    <listModel2 :register="registerModel2"></listModel2>
+    <listModel :register="registerModel" :close-on-click-modal="false"></listModel>
   </Watermark>
 </template>
 
 <script setup lang="jsx" name="demo-table">
 import { onMounted, ref } from 'vue'
-import { ElTag } from 'element-plus'
+import { ElTag, ElButton } from 'element-plus'
 import { baseTable, useTable, baseAction } from '@/components/table'
 import Watermark from '@/components/watermark/index.vue'
 import listModel from '@/views/base/components/lib/listModel.vue'
-import listModel2 from './lib/listModel2.vue'
 import { useModel } from '@/components/baseModel/index.js'
 const getList = async (params) => {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve({
-        data: [{ name: '张三', id: 123123, age: 18, chinese: 100 }]
+        data: [
+          { name: '雾鱼', id: 1, age: 18, chinese: 59.5 },
+          { name: '李四', id: 2, age: 28, chinese: 92 }]
       })
     }, 1000);
   })
@@ -69,7 +74,7 @@ const [register, { reload }] = useTable({
       slotRender: (scope) => {
         const { row } = scope
         return (
-          <ElTag>{row.name}</ElTag>
+          <ElTag type="primary">{row.name}</ElTag>
         )
       }
     }, {
@@ -98,7 +103,6 @@ const [register, { reload }] = useTable({
   }
 })
 const [registerModel, { openModel }] = useModel()
-const [registerModel2, { openModel: openModel2 }] = useModel()
 const getActions = (row) => {
   return [
     {
@@ -108,16 +112,6 @@ const getActions = (row) => {
         openModel({
           data: row,
           title: '编辑'
-        })
-      }
-    },
-    {
-      label: '编辑2',
-      type: 'primary',
-      onClick: () => {
-        openModel2({
-          data: row,
-          title: '编辑2'
         })
       }
     },

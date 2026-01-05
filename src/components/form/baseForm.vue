@@ -41,10 +41,12 @@ const [state, reset] = useStateReactive(() => {
 })
 const schema = ref([])
 const formConfig = ref({})
-const initDetail = () => {
+const initDetail = async (data) => {
+  reset()
   schema.value.forEach((item) => {
     state[item.field] = item.defaultValue
   })
+  Object.assign(state, data)
 }
 
 const resetForm = () => {
@@ -72,12 +74,18 @@ const setSchemaConfig = async (obj) => {
   formConfig.value = omit(obj, ['schema'])
   initDetail()
 }
+
+const setState = async (obj) => {
+  await initDetail(obj)
+}
+
 onMounted(() => {
   const schemaProps = props.register({
     el: formRef,
     events: {
       validForm,
-      setSchemaConfig
+      setSchemaConfig,
+      setState
     }
   })
   schema.value = schemaProps.schema
@@ -86,6 +94,7 @@ onMounted(() => {
 })
 defineExpose({
   validForm,
-  setSchemaConfig
+  setSchemaConfig,
+  setState
 })
 </script>

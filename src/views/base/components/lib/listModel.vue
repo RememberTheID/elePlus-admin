@@ -1,5 +1,5 @@
 <template>
-  <BaseModel v-bind="bindAttrs">
+  <BaseModel v-bind="bindAttrs" @confirm="onConfirm">
     <div class="p-4">
       <baseForm :register="register"></baseForm>
     </div>
@@ -7,7 +7,7 @@
 </template>
 <script setup>
 import { baseForm, useForm } from '@/components/form'
-const [register] = useForm({
+const [register, { setFieldsValue }] = useForm({
   schema: [{
     label: '类型',
     field: 'type',
@@ -41,14 +41,28 @@ const [register] = useForm({
     colLayout: {
       span: 24
     }
+  }, {
+    label: '语文成绩',
+    field: 'chinese',
+    component: 'InputNumber',
+    defaultValue: 18,
+    colLayout: {
+      span: 24
+    }
   }],
   config: {
-    showBtns: false
+    showBtns: false,
+    labelWidth: 100
   }
 })
 import { BaseModel, useModalInner } from '@/components/baseModel/index.js'
-const [bindAttrs, { setModalProps, closeModal }] = useModalInner(async (data) => {
-  console.log(data, 'useModalInner')
+const [bindAttrs, { setModalProps, closeModal }] = useModalInner(async (detail) => {
+  const { data } = detail
+  setFieldsValue(data)
+  // setModalProps({ loading: true })
 });
+const onConfirm = async () => {
+
+}
 
 </script>

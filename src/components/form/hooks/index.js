@@ -1,4 +1,4 @@
-import { reactive, markRaw, shallowRef, ref, unref } from 'vue'
+import { reactive, markRaw, nextTick, ref, unref } from 'vue'
 import { omit } from 'lodash-es'
 import { isVueComponentDefinition } from '../components/componentMap.js'
 import { isFunction } from 'lodash-es'
@@ -16,6 +16,11 @@ export const useForm = (props) => {
     const { setSchemaConfig } = await formRef.value.events
     Object.assign(formConfig, obj)
     setSchemaConfig(formConfig)
+  }
+  const setFieldsValue = async (obj = {}) => {
+    const { setState } = await formRef.value.events
+    await nextTick()
+    setState && setState(obj)
   }
   const schemaProps = unref(schema).map((item) => {
     return {
@@ -36,7 +41,8 @@ export const useForm = (props) => {
   }
   return [register, {
     validate,
-    setProps
+    setProps,
+    setFieldsValue
   }]
 }
 export const useStateReactive = (fn) => {

@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full flex gap-2 mb-3">
+  <div class="w-full flex gap-2">
     <div class="left select-none" v-show="showMove">
       <Icon icon="line-md:chevron-small-left" class="text-2xl cursor-pointer" @click="leftMove" />
     </div>

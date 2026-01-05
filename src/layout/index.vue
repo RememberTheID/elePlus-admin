@@ -5,7 +5,7 @@
       <div class="top_header border-b-solid border-b-1 border-gray-200  px-2">
         <div class="flex flex-col">
           <div class="mr-2 flex items-center justify-between">
-            <div class="flex">
+            <div class="flex items-center">
               <Icon icon="material-symbols:keyboard-double-arrow-left-rounded" v-if="!menuStore.isCollapse"
                 class="text-2xl cursor-pointer" @click="switchCollapse()" />
               <Icon icon="material-symbols:keyboard-double-arrow-right-rounded" v-else class="text-2xl cursor-pointer"
@@ -25,14 +25,17 @@
               </div>
             </div>
           </div>
-          <el-breadcrumb separator="/">
+        </div>
+        <div class="target mt-4 flex items-center mb-3">
+          <el-breadcrumb class="whitespace-nowrap flex" separator="/">
             <template v-for="item in routePages" :key="item.path">
-              <el-breadcrumb-item :to="{ path: item.path }">{{ item.meta.title }}</el-breadcrumb-item>
+              <el-breadcrumb-item :to="{ path: item.path }">{{ item.meta.title
+              }}</el-breadcrumb-item>
             </template>
           </el-breadcrumb>
-        </div>
-        <div class="target mt-4">
-          <Tabs />
+          <div class="flex-1 ml-10">
+            <Tabs />
+          </div>
         </div>
       </div>
       <div class="content flex-1 relative">

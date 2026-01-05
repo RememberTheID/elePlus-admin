@@ -29,15 +29,25 @@ export const useModalInner = (callback) => {
     modelValue: false,
     title: '',
     loading: false,
-    onClose: (val) => {
+    close: (val) => {
+      registerEl.modelValue = false;
+    },
+    onClosed: () => {
+      registerEl.modelValue = false;
+    },
+    confirm: async (cb) => {
+      registerEl.loading = true;
+      cb && await cb();
+      registerEl.loading = false;
       registerEl.modelValue = false;
     }
   })
 
   const innerMethods = {
-    openModel: (data) => {
+    openModel: async (data) => {
       registerEl.modelValue = true;
       registerEl.title = data?.title || '';
+      await nextTick();
       callback && callback(data);
     },
     closeModal: () => {
