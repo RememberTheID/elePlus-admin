@@ -2,7 +2,7 @@
   <div class="flex h-full">
     <Menu />
     <div class="flex-1 flex flex-col box-border min-w-0">
-      <div class="top_header border-b-solid border-b-1 border-gray-200  px-2">
+      <div class="top_header border-b-solid border-b-1 border-gray-200  p-2">
         <div class="flex flex-col">
           <div class="mr-2 flex items-center justify-between">
             <div class="flex items-center">
@@ -11,6 +11,13 @@
               <Icon icon="material-symbols:keyboard-double-arrow-right-rounded" v-else class="text-2xl cursor-pointer"
                 @click="switchCollapse()" />
               <div class="ml-2 text-gray-400">欢迎进入 {{ sysTitle }}</div>
+              <div class="ml-10">
+                <el-breadcrumb separator="/">
+                  <template v-for="item in routePages" :key="item.path">
+                    <el-breadcrumb-item :to="{ path: item.path }">{{ item.meta.title }}</el-breadcrumb-item>
+                  </template>
+                </el-breadcrumb>
+              </div>
             </div>
             <div class="top_right">
               <div>
@@ -26,16 +33,8 @@
             </div>
           </div>
         </div>
-        <div class="target mt-4 flex items-center mb-3">
-          <el-breadcrumb class="whitespace-nowrap flex" separator="/">
-            <template v-for="item in routePages" :key="item.path">
-              <el-breadcrumb-item :to="{ path: item.path }">{{ item.meta.title
-              }}</el-breadcrumb-item>
-            </template>
-          </el-breadcrumb>
-          <div class="flex-1 ml-10">
-            <Tabs />
-          </div>
+        <div class="target mt-4">
+          <Tabs />
         </div>
       </div>
       <div class="content flex-1 relative">
