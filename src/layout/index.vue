@@ -10,14 +10,12 @@
                 class="text-2xl cursor-pointer" @click="switchCollapse()" />
               <Icon icon="material-symbols:keyboard-double-arrow-right-rounded" v-else class="text-2xl cursor-pointer"
                 @click="switchCollapse()" />
-              <div class="ml-2 text-gray-400">欢迎进入 {{ sysTitle }}</div>
-              <div class="ml-10">
-                <el-breadcrumb separator="/">
-                  <template v-for="item in routePages" :key="item.path">
-                    <el-breadcrumb-item :to="{ path: item.path }">{{ item.meta.title }}</el-breadcrumb-item>
-                  </template>
-                </el-breadcrumb>
-              </div>
+              <div class="ml-2 text-gray-400" v-if="routePages.length <= 1">欢迎进入 {{ sysTitle }}</div>
+              <el-breadcrumb class="ml-2" separator="/" v-else>
+                <template v-for="item in routePages" :key="item.path">
+                  <el-breadcrumb-item :to="{ path: item.path }">{{ item.meta.title }}</el-breadcrumb-item>
+                </template>
+              </el-breadcrumb>
             </div>
             <div class="top_right">
               <div>
