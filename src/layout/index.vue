@@ -2,7 +2,7 @@
   <div class="flex h-full">
     <Menu />
     <div class="flex-1 flex flex-col box-border min-w-0">
-      <div class="top_header border-b-solid border-b-1 border-gray-200  p-2">
+      <div class="top_header border-b-solid border-b-1 border-gray-200 px-2">
         <div class="flex flex-col">
           <div class="mr-2 flex items-center justify-between">
             <div class="flex items-center">
@@ -31,7 +31,7 @@
             </div>
           </div>
         </div>
-        <div class="target mt-4">
+        <div class="target my-2">
           <Tabs />
         </div>
       </div>
