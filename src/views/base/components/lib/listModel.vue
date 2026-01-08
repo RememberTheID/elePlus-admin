@@ -12,7 +12,6 @@ const [register, { setFieldsValue }] = useForm({
     label: '类型',
     field: 'type',
     component: 'Select',
-    defaultValue: 1,
     componentProps: {
       placeholder: '请选择类型',
       options: [
@@ -34,7 +33,7 @@ const [register, { setFieldsValue }] = useForm({
     label: '名称',
     field: 'name',
     component: 'Input',
-    defaultValue: '张三',
+    ifShow: (form) => form.type === 1,
     componentProps: {
       placeholder: '请输入名称'
     },
@@ -45,7 +44,6 @@ const [register, { setFieldsValue }] = useForm({
     label: '语文成绩',
     field: 'chinese',
     component: 'InputNumber',
-    defaultValue: 18,
     colLayout: {
       span: 24
     }

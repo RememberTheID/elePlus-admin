@@ -7,7 +7,7 @@
       <template v-for="(item, index) in props.options">
         <span class="mx-1 cursor-pointer" @click="(e) => clickItem(item, e, index)">
           <ElTag :type="modelValue === item.path ? 'primary' : 'info'" :closable="props.options.length > 1"
-            class="flex items-center" @close="close(item)">
+            class="flex items-center select-none" @close="close(item)" @contextmenu="e => onMenu(e, item)">
             {{ item.title }}
           </ElTag>
         </span>
@@ -26,15 +26,20 @@ import { Icon } from "@iconify/vue";
 import { floor, debounce } from 'lodash-es';
 const scrollRef = ref(null)
 const showMove = ref(false)
+const rightMenuRef = ref(null)
 const { x } = useScroll(scrollRef, { behavior: 'smooth' })
 const { width } = useElementSize(scrollRef)
-const emit = defineEmits(['tab-click', 'tab-remove'])
+const emit = defineEmits(['tab-click', 'tab-remove', 'right-event'])
 const props = defineProps({
   options: {
     type: Array,
     default: () => []
   }
 })
+const onMenu = (event, e) => {
+  event.preventDefault()
+  emit('right-event', event, e)
+}
 const clickItem = (item, e, index) => {
   value.value = item;
   const target = e.currentTarget;

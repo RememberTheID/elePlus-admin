@@ -26,8 +26,8 @@ const getList = async (params) => {
     setTimeout(() => {
       resolve({
         data: [
-          { name: '雾鱼', id: 1, age: 18, chinese: 59.5 },
-          { name: '李四', id: 2, age: 28, chinese: 92 }]
+          { name: '雾鱼', id: 1, age: 18, chinese: 59.5, type: 1 },
+          { name: '李四', id: 2, age: 28, chinese: 92, type: 2 }]
       })
     }, 1000);
   })
